@@ -1,2 +1,3 @@
 # Care-FastAPI
-FastAPI + SqlAlchemy + Alembic
+FastAPI + SqlAlchemy(Object Relational Mapper) + Alembic (Database Migration)
+
