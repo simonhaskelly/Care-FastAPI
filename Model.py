@@ -40,7 +40,7 @@ class Raw(Base):
     time = Column(TIMESTAMP, index=True)
 
     # room = relationship("DBRoom", foreign_keys=[room_id])
-    room = relationship("Room", back_populates="name")
+    room = relationship("Room", back_populates="data")  # Sqlalchemy magic /*
 
 
 class Room(Base):
@@ -48,7 +48,7 @@ class Room(Base):
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     name = Column(String(30), nullable=False)
 
-    data = relationship("Raw", back_populates="id")
+    data = relationship("Raw", back_populates="room")  # Sqlalchemy magic /*
 
 Base.metadata.create_all(bind=engine)
 
@@ -72,7 +72,7 @@ class RoomBase(BaseModel):
 
 
 def add_raw(db: Session, raw: RawBase):
-    db_raw = Raw(**raw.dict())
+    db_raw = Raw(v=raw.v, i=raw.i, room_id=raw.room_id, time=datetime.now())
     db.add(db_raw)
     db.commit()
     db.refresh(db_raw)

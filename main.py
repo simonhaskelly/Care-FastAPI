@@ -15,10 +15,11 @@ app.add_middleware(
 
 
 # Routes
+# lallaalalal
 @app.post('/api/')  # , response_model=User
 async def add_row(db: Session = Depends(get_db), raw: RawBase = Depends(RawBase.as_form)):
     db_user = add_raw(db, raw)
-    return raw.dict()
+    return db_user
 
 
 # @app.get('/api/')  # , response_model=List[User]
